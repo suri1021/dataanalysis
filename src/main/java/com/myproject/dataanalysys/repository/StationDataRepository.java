@@ -2,6 +2,7 @@ package com.myproject.dataanalysys.repository;
 
 import java.util.List;
 
+import com.myproject.dataanalysys.entity.StatisticsData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

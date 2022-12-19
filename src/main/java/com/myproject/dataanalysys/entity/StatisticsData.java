@@ -1,5 +1,6 @@
 package com.myproject.dataanalysys.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,17 +10,24 @@ import javax.persistence.*;
 @Data
 public class StatisticsData {
 
+    @JsonIgnore
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false, insertable = false, updatable = false)
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
 
+    @Column(name = "year")
     private int year;
 
+    @Column(name = "cityid")
     private String cityId;
 
-    private int AvgMaxTemparature;
+    @Column(name = "avgMaxTemparature")
+    private int avgMaxTemparature;
 
-    private int AvgMinTemparature;
+    @Column(name = "avgMinTemparature")
+    private int avgMinTemparature;
 
+    @Column(name = "totalPrecipitation")
     private int totalPrecipitation;
 }

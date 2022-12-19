@@ -26,8 +26,13 @@ public class StatisticDataServiceImpl implements  StatisticsDataService{
      */
     @Override
     public void updateStatistics() {
+        statisticsDataRepository.deleteAll();
 
-        List<Object[]> list = stationDataService.getDistinctListAndYear();
+        List<StatisticsData> statisticsDataList = getStatistics();
+
+        statisticsDataRepository.saveAll(statisticsDataList);
+
+  /*      List<Object[]> list = stationDataService.getDistinctListAndYear();
 
         ArrayList<StatisticsData> statisticsDataArrayList = new ArrayList<>();
 
@@ -65,11 +70,16 @@ public class StatisticDataServiceImpl implements  StatisticsDataService{
                 statisticsDataArrayList.add(statistics);
         }
 
-        statisticsDataRepository.saveAll(statisticsDataArrayList);
+        statisticsDataRepository.saveAll(statisticsDataArrayList);*/
     }
 
     @Override
     public List<StatisticsData> findAll() {
         return statisticsDataRepository.findAll();
+    }
+
+    @Override
+    public List<StatisticsData> getStatistics() {
+       return statisticsDataRepository.getStatistics();
     }
 }

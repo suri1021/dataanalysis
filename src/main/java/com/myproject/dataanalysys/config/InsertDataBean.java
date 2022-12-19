@@ -45,19 +45,19 @@ public class InsertDataBean {
 		
 		try {
 			File folder = ResourceUtils.getFile("classpath:wx_data");
-			
+			log.info("In insert Bean");
 			for (final File fileEntry : folder.listFiles()) {
-				
+
 				String stationName = fileEntry.getName().replace(".txt", "");
-				
+
 				if (stationDataService.getStationDataByCity(stationName).size() > 0)
-					continue;				
+					continue;
 
 				log.info("Started data collection for station " + stationName + " time " + LocalDateTime.now());
 				BufferedReader br = new BufferedReader(new FileReader(fileEntry));
-				String data =  null;
+				String data = null;
 				ArrayList<StationData> stationDataList = new ArrayList<>();
-				while ((data  = br.readLine()) != null) {
+				while ((data = br.readLine()) != null) {
 					data = StringUtils.normalizeSpace(data);
 					StationData stationData = new StationData();
 					String str[] = data.split(" ");
@@ -73,15 +73,14 @@ public class InsertDataBean {
 				}
 				log.info("Saving data");
 
-				if (! stationDataList.isEmpty())
+				if (!stationDataList.isEmpty())
 					stationDataService.saveData(stationDataList);
 
 				br.close();
 				log.info("Ended data loading for station " + stationName + " time " + LocalDateTime.now());
 			}
 
-			statisticsDataService.updateStatistics();
-
+			log.info("Insertion of records ended");
 		} catch (IOException e) {
 			
 			log.error("Error while reading", e);

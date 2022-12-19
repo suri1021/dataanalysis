@@ -8,4 +8,6 @@ public interface StatisticsDataService {
     void updateStatistics();
 
     List<StatisticsData> findAll();
+
+    List<StatisticsData> getStatistics();
 }
